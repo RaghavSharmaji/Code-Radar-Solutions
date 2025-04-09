@@ -1,24 +1,21 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 int main() {
-    char str[100];
-    int i, len, isPalindrome = 1;
+    char str[1000];
+    int count = 0, i;
 
-    scanf("%s", str);
-    len = strlen(str);
+    // Read a full line of input
+    fgets(str, sizeof(str), stdin);
 
-    for (i = 0; i < len / 2; i++) {
-        if (str[i] != str[len - i - 1]) {
-            isPalindrome = 0;
-            break;
+    for (i = 0; str[i] != '\0'; i++) {
+        if ((i == 0 && !isspace(str[i])) || 
+           (!isspace(str[i]) && isspace(str[i - 1]))) {
+            count++;
         }
     }
 
-    if (isPalindrome)
-        printf("Yes\n");
-    else
-        printf("No\n");
-
+    printf("%d\n", count);
     return 0;
 }
